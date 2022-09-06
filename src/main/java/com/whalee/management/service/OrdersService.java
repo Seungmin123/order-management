@@ -4,11 +4,13 @@ import com.whalee.management.config.error.message.ErrorMessage;
 import com.whalee.management.domain.order.Orders;
 import com.whalee.management.domain.order.OrdersRepository;
 import com.whalee.management.domain.order.OrderStatus;
+import com.whalee.management.web.dto.OrdersListReponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -32,13 +34,10 @@ public class OrdersService {
     }
 
     @Transactional(readOnly = true)
-    public List<Orders> getOrderList(){
-        // 약식으로 Order Class 를 만들어 리스트 조회 시 필요한 객체만 선언한 Dto를 만들지 않았습니다.
-        return ordersRepository.findAll();
-        // Order Class 를 정식으로 만들고 OrderResponseDto를 생성할 경우 아래 코드로 대체합니다.
-//        return orderRepository.findAll().stream()
-//                .map(OrderResponseDto::new)
-//                .collect(Collectors.toList());
+    public List<OrdersListReponseDto> getOrderList(){
+        return ordersRepository.findAll().stream()
+                .map(OrdersListReponseDto::new)
+                .collect(Collectors.toList());
     }
 
 

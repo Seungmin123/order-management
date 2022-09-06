@@ -3,6 +3,7 @@ package com.whalee.management.web;
 import com.whalee.management.domain.order.Orders;
 import com.whalee.management.domain.order.OrderStatus;
 import com.whalee.management.service.OrdersService;
+import com.whalee.management.web.dto.OrdersListReponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ public class OrdersApiController {
 
     // 주문 목록조회
     @GetMapping("/api/orders")
-    public List<Orders> getOrderList(){
+    public List<OrdersListReponseDto> getOrderList(){
         return ordersService.getOrderList();
     }
 }
